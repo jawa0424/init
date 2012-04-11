@@ -8,8 +8,9 @@ alias ssh4o='~/bin/ssh4.org'
 # プロンプト
 autoload colors
 colors
-PROMPT="%{${fg[blue]}%}%M%{${fg[gray]}%}:%{${fg[green]}%}%/
-%{${fg[yellow]}%}%n %{${reset_color}%}%# "
+PROMPT="
+%{${fg[yellow]}%}%/ %{${reset_color}%}(%m)
+%{${fg[green]}%}%n%{${reset_color}%}%# "
 
 # パスの設定
 PATH=/usr/local/bin:$PATH
