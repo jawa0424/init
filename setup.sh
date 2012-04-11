@@ -15,6 +15,10 @@ cmd="echo 'source ~/init.git/.vimrc' > ~/.vimrc"
 echo $cmd
 echo 'source ~/init.git/.vimrc' > ~/.vimrc
 
+cmd="echo 'source ~/init.git/.zshrc' > ~/.zshrc"
+echo $cmd
+echo 'source ~/init.git/.zshrc' > ~/.zshrc
+
 echo 'install NeoBundle'
 
 cmd="git clone https://github.com/Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim";
