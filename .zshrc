@@ -5,6 +5,9 @@ alias sshk='~/bin/sshk'
 alias ssh4='~/bin/ssh4'
 alias ssh4o='~/bin/ssh4.org'
 
+# viライク
+bindkey -v
+
 # プロンプト
 autoload colors
 colors
