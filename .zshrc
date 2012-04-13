@@ -1,10 +1,6 @@
 # 文字コードの設定
 export LANG=ja_JP.UTF-8
 
-alias sshk='~/bin/sshk'
-alias ssh4='~/bin/ssh4'
-alias ssh4o='~/bin/ssh4.org'
-
 # プロンプト
 autoload colors
 colors
@@ -20,7 +16,11 @@ export MANPATH=/usr/local/share/man:/usr/local/man:/usr/share/man
 find-grep () { find . -type f -print | xargs grep -n --binary-files=without-match $@ }
 
 # エイリアスの設定
-alias ls='ls --color=auto'
+if [ "${HOME#/Users/}" != "$HOME" ]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=auto'
+fi
 alias ll='ls -ltr'
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 
