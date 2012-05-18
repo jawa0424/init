@@ -104,7 +104,8 @@ setopt share_history
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # ディレクトリを水色にする｡
-export LS_COLORS='di=01;36'
+#export LS_COLORS='di=01;94'
+export LS_COLORS='di=01;94:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;36:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 
 # ファイルリスト補完でもlsと同様に色をつける｡
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
