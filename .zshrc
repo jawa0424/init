@@ -12,20 +12,11 @@ PROMPT="
 %{${fg[green]}%}%n%{${reset_color}%}%# "
 
 # パスの設定
-PATH=/usr/local/bin:$PATH
+# PATH=/usr/local/bin:$PATH
 export MANPATH=/usr/local/share/man:/usr/local/man:/usr/share/man
 
 # 関数
 find-grep () { find . -type f -print | xargs grep -n --binary-files=without-match $@ }
-
-# エイリアスの設定
-if [ "${HOME#/Users/}" != "$HOME" ]; then
-  alias ls='ls -G'
-else
-  alias ls='ls --color=auto'
-fi
-alias ll='ls -ltr'
-alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
 
 # ヒストリの設定
 HISTFILE=~/.histfile
@@ -103,9 +94,6 @@ setopt share_history
 # Ctrl+wで､直前の/までを削除する｡
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-# ディレクトリを水色にする｡
-export LS_COLORS='di=01;36'
-
 # ファイルリスト補完でもlsと同様に色をつける｡
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
@@ -117,3 +105,25 @@ setopt auto_cd
 
 # C-s, C-qを無効にする。
 setopt no_flow_control
+
+# カラー設定
+export LSCOLORS=ExFxCxdxBxegedabagacad
+export LS_COLORS='di=01;36:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;36:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+zstyle ':completion:*' list-colors 'di=;36;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
+if [ "${HOME#/Users/}" != "$HOME" ]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=auto'
+fi
+alias ll='ls -ltr'
+alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
+
+# Pager関連の設定
+alias less='/usr/bin/less -MN'
+export PAGER=/usr/bin/less
+export LESSCHARSET=utf-8
+export LV='-la -Ou8'
+
+
+# 個別設定があったら読む
+[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
