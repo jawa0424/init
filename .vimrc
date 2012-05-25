@@ -17,9 +17,19 @@ NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'tsukkee/unite-help'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'basyura/unite-rails'
+NeoBundle 'thinca/vim-unite-history'
+NeoBundle 'tsukkee/unite-tag'
+"NeoBundle 'choplin/unite-vim_hacks'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'tpope/vim-rails'
 NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'jQuery'
+NeoBundle 'nginx.vim'
+NeoBundle 'yanktmp.vim'
 
 filetype plugin indent on
 
@@ -67,7 +77,7 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_camel_case_completion = 1
 let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_min_syntax_length = 2
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 let g:neocomplcache_dictionary_filetype_lists = {
     \ 'default' : '',
@@ -95,6 +105,8 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
@@ -104,3 +116,8 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+" yanktmp.vim
+map <silent> sy :call YanktmpYank()<CR>
+map <silent> sp :call YanktmpPaste_p()<CR>
+map <silent> sP :call YanktmpPaste_P()<CR>
