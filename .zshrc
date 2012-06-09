@@ -21,6 +21,7 @@ find-grep () { find . -type f -print | xargs grep -n --binary-files=without-matc
 # エイリアスの設定
 if [ "${HOME#/Users/}" != "$HOME" ]; then
   alias ls='ls -G'
+  export LSCOLORS=gxfxcxdxbxegedabagacad
 else
   alias ls='ls --color=auto'
 fi
