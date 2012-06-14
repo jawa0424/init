@@ -16,10 +16,21 @@ NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'tsukkee/unite-help'
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'basyura/unite-rails'
+NeoBundle 'thinca/vim-unite-history'
+NeoBundle 'tsukkee/unite-tag'
+"NeoBundle 'choplin/unite-vim_hacks'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'vim-ruby/vim-ruby'
+NeoBundle 'tpope/vim-rails'
 NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'jQuery'
+NeoBundle 'nginx.vim'
+NeoBundle 'yanktmp.vim'
 
 filetype plugin indent on
 
@@ -32,7 +43,8 @@ set autoindent
 set number
 set ambiwidth=double
 set encoding=utf-8
-set fileencodings=ucs-bom,utf-,8iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
+set fileencoding=utf8
+set fileencodings=ucs-bom,utf-8,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,cp932
 set backspace=indent,start,eol
 
 "" colorscheme
@@ -61,3 +73,58 @@ augroup BinaryXXD
   autocmd BufWritePost * if &binary | silent %!xxd -g 1
   autocmd BufWritePost * set nomod | endif
 augroup END
+
+" neocomplcache settings
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 2
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+    \ }
+if !exists('g:neocomplcache_keyword_patterns')
+  let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+" recommended
+inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+au BufRead,BufNewFile *.js set ft=javascript syntax=jquery
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+"autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+" yanktmp.vim
+map <silent> sy :call YanktmpYank()<CR>
+map <silent> sp :call YanktmpPaste_p()<CR>
+map <silent> sP :call YanktmpPaste_P()<CR>
+
+" vimfiler
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+
