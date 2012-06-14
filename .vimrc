@@ -31,6 +31,11 @@ NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'jQuery'
 NeoBundle 'nginx.vim'
 NeoBundle 'yanktmp.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'bkad/CamelCaseMotion.git'
+NeoBundle 'kchmck/vim-coffee-script.git'
+NeoBundle 'thinca/vim-quickrun.git'
 
 filetype plugin indent on
 
@@ -128,3 +133,14 @@ map <silent> sP :call YanktmpPaste_P()<CR>
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
 
+" CamelCaseMotion
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
+" Quickrun
+let g:quickrun_config = {}
+let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
