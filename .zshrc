@@ -18,6 +18,11 @@ export MANPATH=/usr/local/share/man:/usr/local/man:/usr/share/man
 # 関数
 find-grep () { find . -type f -print | xargs grep -n --binary-files=without-match $@ }
 
+# エイリアスの設定
+if [ "${HOME#/Users/}" != "$HOME" ]; then
+  export LSCOLORS=gxfxcxdxbxegedabagacad
+fi
+
 # ヒストリの設定
 HISTFILE=~/.histfile
 HISTSIZE=10000
