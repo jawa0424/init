@@ -132,6 +132,11 @@ map <silent> sP :call YanktmpPaste_P()<CR>
 " vimfiler
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
+call vimfiler#set_execute_file('rb','vim')
+call vimfiler#set_execute_file('log','vim')
+call vimfiler#set_execute_file('yml','vim')
+call vimfiler#set_execute_file('json','vim')
+call vimfiler#set_execute_file('erb','vim')
 
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w
