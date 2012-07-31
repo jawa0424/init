@@ -126,6 +126,10 @@ else
 fi
 alias ll='ls -ltr'
 alias gd='dirs -v; echo -n "select number: "; read newdir; cd +"$newdir"'
+alias grep='grep --color'
+alias ucrestart='kill -HUP `cat shared/pid/unicorn.pid`'
+alias ucstop='kill -QUIT `cat shared/pid/unicorn.pid`'
+alias ucstart='bundle exec unicorn -Dc config/unicorn.rb'
 
 # Pager関連の設定
 alias less='/usr/bin/less -MN'
