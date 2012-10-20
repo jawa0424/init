@@ -36,6 +36,7 @@ NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'bkad/CamelCaseMotion.git'
 NeoBundle 'kchmck/vim-coffee-script.git'
 NeoBundle 'thinca/vim-quickrun.git'
+NeoBundle 'othree/eregex.vim'
 
 filetype plugin indent on
 
@@ -137,6 +138,7 @@ call vimfiler#set_execute_file('log','vim')
 call vimfiler#set_execute_file('yml','vim')
 call vimfiler#set_execute_file('json','vim')
 call vimfiler#set_execute_file('erb','vim')
+nmap :vf :VimFilerBufferDir -split -simple -winwidth=35 -no-quit
 
 " CamelCaseMotion
 map <silent> w <Plug>CamelCaseMotion_w
@@ -149,3 +151,9 @@ sunmap e
 " Quickrun
 let g:quickrun_config = {}
 let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+
+" for eregex.vim
+nnoremap / :M/
+nnoremap ? :M?
+nnoremap ,/ /
+nnoremap ,? ?

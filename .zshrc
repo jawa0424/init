@@ -2,7 +2,7 @@
 export LANG=ja_JP.UTF-8
 
 # viライク
-bindkey -v
+#bindkey -v
 
 # プロンプト
 autoload colors
@@ -140,3 +140,7 @@ export LV='-la -Ou8'
 
 # 個別設定があったら読む
 [ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
+
+
+# 便利そうなコマンドalias
+alias tailf='tail -100f'
