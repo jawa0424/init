@@ -1,10 +1,6 @@
 # 文字コードの設定
 export LANG=ja_JP.UTF-8
 
-# viライク
-#bindkey -v
-
-# プロンプト
 autoload colors
 colors
 PROMPT="
