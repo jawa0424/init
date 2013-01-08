@@ -1,0 +1,103 @@
+startup_message off
+autodetach on
+vbell off
+shell /bin/zsh
+shelltitle "$ |shell"
+defscrollback 1000
+termcapinfo cygwin KJ=UTF8
+defutf8 on
+defencoding UTF8
+encoding utf-8 utf-8
+caption always "%-w%10L>%{=b bw}%n %t%{-}%+w%-0="
+hardstatus alwayslastline "%H%=%Y/%m/%d %02c"
+defbce "on"
+term xterm-256color
+
+# Key Settings
+escape ^Jj
+bind j focus down
+bind k focus up
+bind t focus top
+bind b focus bottom
+bind h focus left
+bind l focus right
+
+# continuous region operations(like vim)
+# orverride default `^R'(wrap) mapping.
+bind ^R           eval                'command -c region' 'echo "[Region]"'
+bind r            eval                'command -c region' 'echo "[Region]"'
+bind ^J           eval 'focus down'   'command -c region' 'echo "[Region] (focus down)"'
+bind ^K           eval 'focus up'     'command -c region' 'echo "[Region] (focus up)"'
+bind -c region ^J eval 'focus down'   'command -c region' 'echo "[Region] (focus up)"'
+bind -c region ^K eval 'focus up'     'command -c region' 'echo "[Region] (focus up)"'
+bind -c region ^T eval 'focus top'    'command -c region' 'echo "[Region] (focus top)"'
+bind -c region ^B eval 'focus bottom' 'command -c region' 'echo "[Region] (focus bottom)"'
+bind -c region ^N eval 'focus down'   'command -c region' 'echo "[Region] (focus down)"'
+bind -c region ^P eval 'focus up'     'command -c region' 'echo "[Region] (focus up)"'
+bind -c region +  eval 'resize +1'    'command -c region' 'echo "[Region] (resize +1)"'
+bind -c region -  eval 'resize -1'    'command -c region' 'echo "[Region] (resize -1)"'
+bind -c region j  eval 'resize +1'    'command -c region' 'echo "[Region] (resize +1)"'
+bind -c region k  eval 'resize -1'    'command -c region' 'echo "[Region] (resize -1)"'
+bind -c region J  eval 'resize +10'   'command -c region' 'echo "[Region] (resize +10)"'
+bind -c region K  eval 'resize -10'   'command -c region' 'echo "[Region] (resize -10)"'
+bind -c region =  eval 'resize ='     'command -c region' 'echo "[Region] (resize =)"'
+bind -c region .  eval 'resize min'   'command -c region' 'echo "[Region] (resize min)"'
+bind -c region _  eval 'resize max'   'command -c region' 'echo "[Region] (resize max)"'
+bind -c region n  eval 'split'        'command -c region' 'echo "[Region] (split)"'
+bind -c region s  eval 'split' 'focus down' 'other' 'command -c region' 'echo "[Region] (split)"'
+bind -c region c  eval 'remove'       'command -c region' 'echo "[Region] (remove)"'
+bind -c region o  eval 'only'         'command -c region' 'echo "[Region] (only)"'
+# # just a little like emacs
+bind -c region 1  eval 'only'         'command -c region' 'echo "[Region] (split)"'
+bind -c region 2  eval 'split'        'command -c region' 'echo "[Region] (split)"'
+
+# re-define continuous region operation (vertical resize locally and focus next/prev)
+bind -c region ^N eval 'focus next'       'command -c region' 'echo "[Region] (focus next)"'
+bind -c region ^P eval 'focus prev'       'command -c region' 'echo "[Region] (focus prev)"'
+bind -c region j  eval 'resize -l -v +1'  'command -c region' 'echo "[Region] (resize -l -v +1)"'
+bind -c region k  eval 'resize -l -v -1'  'command -c region' 'echo "[Region] (resize -l -v -1)"'
+bind -c region J  eval 'resize -l -v +10' 'command -c region' 'echo "[Region] (resize -l -v +10)"'
+bind -c region K  eval 'resize -l -v -10' 'command -c region' 'echo "[Region] (resize -l -v -10)"'
+bind -c region =  eval 'resize -l ='      'command -c region' 'echo "[Region] (resize -l =)"'
+
+# add continuous region operation(like vim)
+bind -c region ^H eval 'focus left'       'command -c region' 'echo "[Region] (focus left)"'
+bind -c region ^L eval 'focus right'      'command -c region' 'echo "[Region] (focus right)"'
+bind -c region <  eval 'resize -l -h -1'  'command -c region' 'echo "[Region] (resize -l -h -1)"'
+bind -c region >  eval 'resize -l -h +1'  'command -c region' 'echo "[Region] (resize -l -h +1)"'
+bind -c region h  eval 'resize -l -h -1'  'command -c region' 'echo "[Region] (resize -l -h -1)"'
+bind -c region l  eval 'resize -l -h +1'  'command -c region' 'echo "[Region] (resize -l -h +1)"'
+bind -c region H  eval 'resize -l -h -10' 'command -c region' 'echo "[Region] (resize -l -h -10)"'
+bind -c region L  eval 'resize -l -h +10' 'command -c region' 'echo "[Region] (resize -l -h +10)"'
+bind -c region ^V eval 'split -v'         'command -c region' 'echo "[Region] (split -v)"'
+bind -c region v  eval 'split -v'         'command -c region' 'echo "[Region] (split -v)"'
+bind -c region |  eval 'split -v'         'command -c region' 'echo "[Region] (split -v)"'
+bind -c region 3  eval 'split -v'         'command -c region' 'echo "[Region] (split -v)"'
+# greedy continuous resize region
+bind -c region ^E eval 'resize ='         'command -c region' 'echo "[Region] (resize =)"'
+bind -c region ^X eval 'resize max'       'command -c region' 'echo "[Region] (resize max)"'
+
+# window Initialize
+split -v
+split -v
+screen
+title edit1
+focus next
+screen
+title edit2
+focus next
+split
+screen
+title view1
+focus next
+screen
+title view2
+focus top
+
+# changes the filename used for reading and writing with the paste buffer.
+bufferfile 'screen/screen-exchange'
+
+# copy the screen pastbuffer to the Cygwin pastebord
+bindkey -m ' ' eval 'stuff \040' 'writebuf' 'exec sh -c "nkf -s screen/screen-exchange | /usr/bin/putclip"'
+bindkey -m Y   eval 'stuff Y'    'writebuf' 'exec sh -c "nkf -s screen/screen-exchange | /usr/bin/putclip"'
+bindkey -m W   eval 'stuff W'    'writebuf' 'exec sh -c "nkf -s screen/screen-exchange | /usr/bin/putclip"'
